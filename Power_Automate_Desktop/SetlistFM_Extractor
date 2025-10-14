@@ -1,0 +1,89 @@
+# Prompt for user input and open browser
+Display.InputDialog Title: $'''Website''' Message: $'''Enter the target website''' InputType: Display.InputType.SingleLine IsTopMost: False UserInput=> Website
+WebAutomation.LaunchFirefox.LaunchFirefox Url: Website WindowState: WebAutomation.BrowserWindowState.Normal ClearCache: False ClearCookies: False WaitForPageToLoadTimeout: 60 Timeout: 60 TargetDesktop: $'''{\"DisplayName\":\"Local computer\",\"Route\":{\"ServerType\":\"Local\",\"ServerAddress\":\"\"},\"DesktopType\":\"local\"}''' BrowserInstance=> Browser
+# Extract Data
+WebAutomation.ExtractData.ExtractList BrowserInstance: Browser Control: $'''.setlistList > .songsList .setlistParts.song .songPart''' ExtractionParameters: {[$'''''', $'''Own Text''', $''''''] } PostProcessData: False TimeoutInSeconds: 60 ExtractedData=> SetList
+WebAutomation.ExtractData.ExtractList BrowserInstance: Browser Control: $'''.setlistList > .songsList .setlistParts.song .infoPart''' ExtractionParameters: {[$'''''', $'''Own Text''', $''''''] } PostProcessData: False TimeoutInSeconds: 60 ExtractedData=> SetListInfo
+ON ERROR
+    SET SetListInfo TO [['']]
+END
+WebAutomation.ExtractData.ExtractSingleValue BrowserInstance: Browser ExtractionParameters: {[$'''meta[property=\"qc:artist\"]''', $'''content''', $''''''] } TimeoutInSeconds: 60 ExtractedData=> Artist
+ON ERROR
+    SET Artist TO [['']]
+END
+WebAutomation.ExtractData.ExtractSingleValue BrowserInstance: Browser ExtractionParameters: {[$'''meta[property=\"qc:venue\"]''', $'''content''', $''''''] } TimeoutInSeconds: 60 ExtractedData=> Location
+ON ERROR
+    SET Location TO [['']]
+END
+WebAutomation.ExtractData.ExtractSingleValue BrowserInstance: Browser ExtractionParameters: {[$'''.infoContainer > p a span''', $'''Own Text''', $''''''] } TimeoutInSeconds: 60 ExtractedData=> Tour
+ON ERROR
+    SET Tour TO [['']]
+END
+WebAutomation.ExtractData.ExtractHandPickedValues BrowserInstance: Browser ExtractionParameters: {[$'''.dateBlock .month''', $'''Own Text''', $'''''', $'''Value #1'''], [$'''.dateBlock .day''', $'''Own Text''', $'''''', $'''Value #2'''], [$'''.dateBlock .year''', $'''Own Text''', $'''''', $'''Value #3'''] } TimeoutInSeconds: 60 ExtractedData=> Time
+ON ERROR
+    SET Time TO [['Jan 01 0001']]
+END
+WebAutomation.ExtractData.ExtractSingleValue BrowserInstance: Browser ExtractionParameters: {[$'''.setlistContent p.info .info''', $'''Own Text''', $''''''] } TimeoutInSeconds: 60 ExtractedData=> Note
+ON ERROR
+    SET Note TO [['']]
+END
+# Parse time to datetime, then to specified format (yyyy-mm-dd)
+Variables.ConvertDataTableToCSV.DataTableToCSVCommonSeparator DataTable: Time IncludeColumnNames: False ColumnsSeparator: Variables.CSVColumnsSeparator.Comma CSVText=> Time
+Text.Replace Text: Time TextToFind: $''',''' IsRegEx: False IgnoreCase: False ReplaceWith: $'''%' '%''' ActivateEscapeSequences: False Result=> Time
+Text.ConvertTextToDateTime.ToDateTimeCustomFormat Text: Time CustomFormat: $'''MMM dd yyyy''' DateTime=> Time
+ON ERROR
+    SET Err TO 1
+END
+IF err = 1 THEN
+    Text.ConvertTextToDateTime.ToDateTimeCustomFormat Text: Time CustomFormat: $'''MMM d yyyy''' DateTime=> Time
+END
+Text.ConvertDateTimeToText.FromCustomDateTime DateTime: Time CustomFormat: $'''yyyy-MM-dd''' Result=> Time
+# Extract single values from datatables
+SET Tour TO Tour[0][0]
+SET Note TO Note[0][0]
+SET Artist TO Artist[0][0]
+SET Location TO Location[0][0]
+Text.SplitText.SplitWithDelimiter Text: Location CustomDelimiter: $''', ''' IsRegEx: False Result=> TextList
+SET City TO TextList[0]
+SET Location TO $'''%TextList[1]%, %TextList[2]%'''
+/# Loop through each entry, and reformat it to
+[index]. [song]#/
+Variables.CreateNewDatatable InputTable: { ^['Name', 'Info'], [$'''''', $''''''] } DataTable=> SetListList
+LOOP FOREACH CurrentItem2 IN SetListInfo
+    Variables.AddRowToDataTable.AppendRowToDataTable DataTable: SetListList RowToAdd: ['', CurrentItem2[0]]
+END
+Variables.DeleteRowFromDataTable DataTable: SetListList RowIndex: 0
+SET Count TO 0
+LOOP FOREACH CurrentItem IN SetList
+    Variables.ModifyDataTableItem DataTable: SetListList ColumnNameOrIndex: $'''Name''' RowIndex: Count Value: CurrentItem[0]
+    Variables.IncreaseVariable Value: Count IncrementValue: 1
+END
+# Set up proper setlist
+SET SetListString TO $'''%''%'''
+SET Count TO 1
+LOOP FOREACH CurrentItem3 IN SetListList
+    SET Name TO CurrentItem3[0]
+    SET Info TO CurrentItem3[1]
+    Text.Trim Text: Name TrimOption: Text.TrimOption.Both TrimmedText=> Name
+    Text.Trim Text: Info TrimOption: Text.TrimOption.Both TrimmedText=> Info
+    IF IsNotEmpty(Info) THEN
+        SET SetListString TO $'''%SetListString%
+%Count%. %Name% %Info%'''
+    ELSE
+        SET SetListString TO $'''%SetListString%
+%Count%. %Name%'''
+    END
+    Variables.IncreaseVariable Value: Count IncrementValue: 1
+END
+# Output to Set List.txt on the Desktop
+File.WriteText File: $'''C:\\Users\\Username\\Desktop\\Set List.txt''' TextToWrite: $'''%Artist%
+%City%
+%Location%
+%Time%
+
+Tour: %Tour%
+
+Setlist:
+%SetListString%
+
+%Note%''' AppendNewLine: True IfFileExists: File.IfFileExists.Overwrite Encoding: File.FileEncoding.Unicode
