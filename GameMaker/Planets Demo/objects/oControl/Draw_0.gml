@@ -1,0 +1,1 @@
+draw_circle(oSun.x,oSun.y,point_distance(mouse_x,mouse_y,oSun.x,oSun.y),true)

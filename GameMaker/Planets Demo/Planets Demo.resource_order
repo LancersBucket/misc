@@ -1,0 +1,10 @@
+{
+  "FolderOrderSettings": [],
+  "ResourceOrderSettings": [
+    {"name":"oMoon","order":3,"path":"objects/oMoon/oMoon.yy",},
+    {"name":"sMoon","order":2,"path":"sprites/sMoon/sMoon.yy",},
+    {"name":"oPlanet","order":1,"path":"objects/oPlanet/oPlanet.yy",},
+    {"name":"oControl","order":2,"path":"objects/oControl/oControl.yy",},
+    {"name":"sPlanet","order":1,"path":"sprites/sPlanet/sPlanet.yy",},
+  ],
+}

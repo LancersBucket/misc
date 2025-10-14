@@ -1,0 +1,1 @@
+warplocation = room_next(room);

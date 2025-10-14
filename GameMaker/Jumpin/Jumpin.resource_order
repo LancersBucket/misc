@@ -1,0 +1,14 @@
+{
+  "FolderOrderSettings": [],
+  "ResourceOrderSettings": [
+    {"name":"oWall","order":1,"path":"objects/oWall/oWall.yy",},
+    {"name":"oBounce","order":3,"path":"objects/oBounce/oBounce.yy",},
+    {"name":"Sprite3","order":2,"path":"sprites/Sprite3/Sprite3.yy",},
+    {"name":"oCamera","order":2,"path":"objects/oCamera/oCamera.yy",},
+    {"name":"Sprite2","order":1,"path":"sprites/Sprite2/Sprite2.yy",},
+    {"name":"Sprite45","order":4,"path":"sprites/Sprite45/Sprite45.yy",},
+    {"name":"Sprite4","order":3,"path":"sprites/Sprite4/Sprite4.yy",},
+    {"name":"oControl","order":5,"path":"objects/oControl/oControl.yy",},
+    {"name":"oBounce2","order":4,"path":"objects/oBounce2/oBounce2.yy",},
+  ],
+}

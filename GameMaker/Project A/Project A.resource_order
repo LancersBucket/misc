@@ -1,0 +1,10 @@
+{
+  "FolderOrderSettings": [],
+  "ResourceOrderSettings": [
+    {"name":"sprite0","order":1,"path":"sprites/sprite0/sprite0.yy",},
+    {"name":"sprite1","order":3,"path":"sprites/sprite1/sprite1.yy",},
+    {"name":"object0","order":1,"path":"objects/object0/object0.yy",},
+    {"name":"oWall","order":3,"path":"objects/oWall/oWall.yy",},
+    {"name":"room0","order":1,"path":"rooms/room0/room0.yy",},
+  ],
+}

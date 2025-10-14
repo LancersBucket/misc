@@ -1,0 +1,5 @@
+draw_text(5,5,hsp)
+draw_text(5,20,vsp)
+draw_text(5,35,x)
+draw_text(5,50,y)
+draw_text(5,75,distance)

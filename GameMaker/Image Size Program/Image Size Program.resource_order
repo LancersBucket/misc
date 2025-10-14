@@ -1,0 +1,25 @@
+{
+  "FolderOrderSettings": [
+    {"name":"Animation Curves","order":10,"path":"folders/Animation Curves.yy",},
+    {"name":"Extensions","order":12,"path":"folders/Extensions.yy",},
+    {"name":"Fonts","order":6,"path":"folders/Fonts.yy",},
+    {"name":"Notes","order":11,"path":"folders/Notes.yy",},
+    {"name":"Objects","order":7,"path":"folders/Objects.yy",},
+    {"name":"Paths","order":3,"path":"folders/Paths.yy",},
+    {"name":"Rooms","order":8,"path":"folders/Rooms.yy",},
+    {"name":"Scripts","order":4,"path":"folders/Scripts.yy",},
+    {"name":"Sequences","order":9,"path":"folders/Sequences.yy",},
+    {"name":"Shaders","order":5,"path":"folders/Shaders.yy",},
+    {"name":"Sounds","order":2,"path":"folders/Sounds.yy",},
+    {"name":"Tile Sets","order":1,"path":"folders/Tile Sets.yy",},
+    {"name":"Timelines","order":14,"path":"folders/Timelines.yy",},
+  ],
+  "ResourceOrderSettings": [
+    {"name":"s2p","order":2,"path":"sprites/s2p/s2p.yy",},
+    {"name":"oimage","order":3,"path":"objects/oimage/oimage.yy",},
+    {"name":"oBar","order":1,"path":"objects/oBar/oBar.yy",},
+    {"name":"s2","order":1,"path":"sprites/s2/s2.yy",},
+    {"name":"Font1Big","order":1,"path":"fonts/Font1Big/Font1Big.yy",},
+    {"name":"oBarPrimary","order":2,"path":"objects/oBarPrimary/oBarPrimary.yy",},
+  ],
+}

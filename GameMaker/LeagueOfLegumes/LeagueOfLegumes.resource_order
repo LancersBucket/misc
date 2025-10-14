@@ -1,0 +1,16 @@
+{
+  "FolderOrderSettings": [],
+  "ResourceOrderSettings": [
+    {"name":"oDev","order":4,"path":"objects/oDev/oDev.yy",},
+    {"name":"oGunDisplay","order":2,"path":"objects/oGunDisplay/oGunDisplay.yy",},
+    {"name":"oBullet","order":1,"path":"objects/oBullet/oBullet.yy",},
+    {"name":"oGun1","order":9,"path":"objects/oGun1/oGun1.yy",},
+    {"name":"oGunCtrl","order":3,"path":"objects/oGunCtrl/oGunCtrl.yy",},
+    {"name":"oGunRoot","order":8,"path":"objects/oGunRoot/oGunRoot.yy",},
+    {"name":"sEnemy","order":3,"path":"sprites/sEnemy/sEnemy.yy",},
+    {"name":"oGun0","order":6,"path":"objects/oGun0/oGun0.yy",},
+    {"name":"sGuns","order":2,"path":"sprites/sGuns/sGuns.yy",},
+    {"name":"oEnemy","order":5,"path":"objects/oEnemy/oEnemy.yy",},
+    {"name":"sBullet","order":1,"path":"sprites/sBullet/sBullet.yy",},
+  ],
+}

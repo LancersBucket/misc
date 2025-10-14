@@ -1,0 +1,2 @@
+Touchingbottomwall = false
+Touchingtopwall = false

@@ -1,0 +1,10 @@
+Fixed issue with man overlapping objects on result screen
+Changed how the "AI" calculates their move
+Fixed issue with the rock sometimes not appearing
+Added /SetAIName (Use /default to reset)
+Added /SetYourName (Use /default to reset)
+Added /default (To reset both at the same time)
+Fixed the American Flag exceeding past being greyed out
+Reminded you of Ctrl+Alt+S
+Fixed issue with game increasingly slowing down until it freezes
+Used thine intrenet to help speel woords

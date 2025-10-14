@@ -1,0 +1,1 @@
+draw_text(10,10,"Instances:" + string(instance_count) + "\nFPS:" + string(fps) + "\nGun:" + string(global.gun))

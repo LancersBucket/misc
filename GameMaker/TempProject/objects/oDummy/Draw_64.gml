@@ -1,0 +1,1 @@
+Healthbar(x + 32,y - 10,hp,hpmax)
