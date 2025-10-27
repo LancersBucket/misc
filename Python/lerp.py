@@ -12,6 +12,7 @@ def lerp(a: float, b: float, t: float) -> float:
 
 # Bucket
 def lerp_step(a: float, b: float, steps: int, pos: int) -> float:
-    """Linearly interpolates between a and b, in a number of steps, using t as the position on that scale [0, steps]"""
+    """Linearly interpolates between a and b, in a number of steps,
+        using t as the position on that scale [0, steps]"""
     # Units per step == (b-a)/steps
     return pos*((b-a)/steps) + a

@@ -5,7 +5,8 @@ import time
 # The events of Project-6 start on Cycle 302, Solaris 3275
 # 387 Cycles in a Solaris
 # 20 Hours in a Cycle
-def upm_to_ts(solari: int, cycles: int = None, hours: int = None, minutes: int = None, seconds: int = None):
+def upm_to_ts(solari: int, cycles: int | None = None, hours: int | None = None,
+              minutes: int | None = None, seconds: int | None = None) -> int:
     """Converts UPM time to a timestamp"""
     ts = 0
 
@@ -21,7 +22,7 @@ def upm_to_ts(solari: int, cycles: int = None, hours: int = None, minutes: int =
 
     return ts
 
-def ts_to_upm(ts):
+def ts_to_upm(ts: int) -> tuple[int,int,int,int,int]:
     """Converts a timestamp to UPM time"""
     s = ts%60
     ts //= 60
@@ -41,41 +42,41 @@ def ts_to_upm(ts):
 
     return sol,c,h,m,s
 
-def ts_to_dtime(ts):
+def ts_to_dtime(ts: int) -> str:
     """Converts a timestamp to a human-readable date"""
     sol, c, h, m, s = ts_to_upm(ts)
     return f"Cycle {c:0>3}, Solaris {sol:0>4} {h:0>2}:{m:0>2}:{s:0>2}"
 
-def dtime_to_ts(read):
+def dtime_to_ts(read: str) -> int:
     """Converts a human-readable date to a timestamp"""
     delimiters = [" ",":","Cycle",",","Solaris"]
     for delim in delimiters:
         read = " ".join(read.split(delim))
-    read = read.split()
-    return upm_to_ts(int(read[1]),int(read[0]),int(read[2]),int(read[3]),int(read[4]))
+    out = read.split()
+    return upm_to_ts(int(out[1]),int(out[0]),int(out[2]),int(out[3]),int(out[4]))
 
-def cunix_to_upm_dtime():
+def cunix_to_upm_dtime() -> str:
     """Converts the current unix timestamp to a UPM date"""
     return ts_to_dtime(int(time.time()) + 63853736660)
 
-def unix_to_upm_dtime(unix):
+def unix_to_upm_dtime(unix: int) -> str:
     """Converts a unix timestamp to a UPM date"""
     return ts_to_dtime(unix + 63853736660)
 
-def unix_to_ts(unix):
+def unix_to_ts(unix: int) -> int:
     """Converts a unix timestamp to a UPM timestamp"""
     return unix - 63853736660
 
-def ts_to_unix(ts):
+def ts_to_unix(ts: int) -> int:
     """Converts a unix timestamp to a UPM timestamp"""
     return ts + 63853736660
 
-def subtract_ts_ptime(t1, t2):
+def subtract_ts_ptime(t1: int, t2: int):
     """Subtracts two timestamps and returns upm readable time"""
     sol, c, _h, _m, _s = ts_to_upm(t1-t2)
     return f"{sol} Solari, {c:0>3} Cycles"
 
-def unix_dtime(unix):
+def unix_dtime(unix: int) -> str:
     """Converts unix timestamp to human readable"""
     s = unix%60
     unix //= 60
@@ -100,7 +101,7 @@ CT = upm_to_ts(3247,1)
 
 BIRTHYEAR = 3275-48
 
-#rng = random.randrange(1,387)
+rng = random.randrange(1,387)
 
 #print(unix_dtime(ts_to_unix(upm_to_ts(3247,1))))
 
