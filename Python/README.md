@@ -5,3 +5,5 @@
 	- [UPM/Unix Time Converter](./Project-6/convert_upm_time.py): Convert between United Planets of Mammals time and Unix
 - [lerp.py](lerp.py): Lerp functions
 - [string_fix.py](string_fix.py): Flips the timecode and song name for use in [Sodium](https://github.com/LancersBucket/sodium)
+- [combineMD.py](combineMD.py): A script for combining markdown files into one txt file for import into [NotebookLM](https://notebooklm.google.com/)
+	- A Python version of [combineMD.bat](/Batch/combineMD.bat)
